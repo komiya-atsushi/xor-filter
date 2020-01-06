@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'me.k11i'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.3.0'
+    implementation group: 'com.google.guava', name: 'guava', version: '28.2-jre'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.4.2'
+}
+
+test {
+    useJUnitPlatform()
+}
