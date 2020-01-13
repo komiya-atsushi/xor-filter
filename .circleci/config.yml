@@ -43,5 +43,48 @@ jobs:
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
 
+      - run:
+          name: Build artifacts
+          command: ./gradlew build --stacktrace
+
       - store_test_results:
           path: ~/test-results
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - .gradle/*
+            - build/*
+
+  release:
+    executor: builder
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "6e:f7:3b:3a:ab:a4:99:92:ff:e0:5c:63:a5:8e:1f:d3"
+
+      - checkout
+
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - restore_cache:
+          keys:
+            - xor-filter-dependencies-{{ .Branch }}-{{ checksum "build.gradle" }}
+            - xor-filter-dependencies-{{ .Branch }}-
+            - xor-filter-dependencies-
+
+      - run:
+          name: Publish
+          command: ./gradlew release
+
+workflows:
+  build-release:
+    jobs:
+      - build
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
