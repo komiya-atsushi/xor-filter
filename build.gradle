@@ -7,7 +7,6 @@ plugins {
 }
 
 group 'me.k11i'
-version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
 
