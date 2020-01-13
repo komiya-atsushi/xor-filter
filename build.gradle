@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'me.champeau.gradle.jmh' version '0.5.0'
 }
 
 group 'me.k11i'
@@ -18,4 +19,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jmh {
+    timeUnit = 'ms'
+    resultFormat = 'CSV'
 }
