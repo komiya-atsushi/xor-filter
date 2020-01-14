@@ -81,3 +81,13 @@ public class XorFilterDemo {
     }
 }
 ```
+
+## Benchmark
+
+```
+Benchmark                           (filterFactory)   Mode  Cnt     Score     Error   Units
+QueryBenchmark.benchmarkQuery   BLOOM_FILTER_FPP001  thrpt   25  5916.329 ± 129.084  ops/ms
+QueryBenchmark.benchmarkQuery  BLOOM_FILTER_FPP0001  thrpt   25  5468.835 ± 102.001  ops/ms
+QueryBenchmark.benchmarkQuery                 XOR_8  thrpt   25  7251.050 ±  37.909  ops/ms
+QueryBenchmark.benchmarkQuery                XOR_16  thrpt   25  7252.813 ±  43.725  ops/ms
+```
