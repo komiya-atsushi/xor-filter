@@ -85,9 +85,13 @@ public class XorFilterDemo {
 ## Benchmark
 
 ```
-Benchmark                           (filterFactory)   Mode  Cnt     Score     Error   Units
-QueryBenchmark.benchmarkQuery   BLOOM_FILTER_FPP001  thrpt   25  5916.329 ± 129.084  ops/ms
-QueryBenchmark.benchmarkQuery  BLOOM_FILTER_FPP0001  thrpt   25  5468.835 ± 102.001  ops/ms
-QueryBenchmark.benchmarkQuery                 XOR_8  thrpt   25  7251.050 ±  37.909  ops/ms
-QueryBenchmark.benchmarkQuery                XOR_16  thrpt   25  7252.813 ±  43.725  ops/ms
+Benchmark                                            (filterFactory)   Mode  Cnt      Score      Error   Units
+QueryBenchmark.QueryLongBenchmark.benchmark    BLOOM_FILTER_FPP00389  thrpt   25   8879.024 ±   33.261  ops/ms
+QueryBenchmark.QueryLongBenchmark.benchmark    BLOOM_FILTER_FPP00002  thrpt   25   6534.761 ±  124.038  ops/ms
+QueryBenchmark.QueryLongBenchmark.benchmark                    XOR_8  thrpt   25  17458.015 ±  905.750  ops/ms
+QueryBenchmark.QueryLongBenchmark.benchmark                   XOR_16  thrpt   25  16975.909 ± 1041.227  ops/ms
+QueryBenchmark.QueryStringBenchmark.benchmark  BLOOM_FILTER_FPP00389  thrpt   25   5318.409 ±  118.598  ops/ms
+QueryBenchmark.QueryStringBenchmark.benchmark  BLOOM_FILTER_FPP00002  thrpt   25   4449.762 ±   85.742  ops/ms
+QueryBenchmark.QueryStringBenchmark.benchmark                  XOR_8  thrpt   25   7121.787 ±   58.167  ops/ms
+QueryBenchmark.QueryStringBenchmark.benchmark                 XOR_16  thrpt   25   7128.727 ±  104.235  ops/ms
 ```
