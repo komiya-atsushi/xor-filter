@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
-    implementation 'me.k11i:xor-filter:0.1.0'
+    implementation 'me.k11i:xor-filter:0.1.1'
 }
 ```
 
@@ -84,14 +84,26 @@ public class XorFilterDemo {
 
 ## Benchmark
 
-```
-Benchmark                                            (filterFactory)   Mode  Cnt      Score      Error   Units
-QueryBenchmark.QueryLongBenchmark.benchmark    BLOOM_FILTER_FPP00389  thrpt   25   8879.024 ±   33.261  ops/ms
-QueryBenchmark.QueryLongBenchmark.benchmark    BLOOM_FILTER_FPP00002  thrpt   25   6534.761 ±  124.038  ops/ms
-QueryBenchmark.QueryLongBenchmark.benchmark                    XOR_8  thrpt   25  17458.015 ±  905.750  ops/ms
-QueryBenchmark.QueryLongBenchmark.benchmark                   XOR_16  thrpt   25  16975.909 ± 1041.227  ops/ms
-QueryBenchmark.QueryStringBenchmark.benchmark  BLOOM_FILTER_FPP00389  thrpt   25   5318.409 ±  118.598  ops/ms
-QueryBenchmark.QueryStringBenchmark.benchmark  BLOOM_FILTER_FPP00002  thrpt   25   4449.762 ±   85.742  ops/ms
-QueryBenchmark.QueryStringBenchmark.benchmark                  XOR_8  thrpt   25   7121.787 ±   58.167  ops/ms
-QueryBenchmark.QueryStringBenchmark.benchmark                 XOR_16  thrpt   25   7128.727 ±  104.235  ops/ms
-```
+### Throughput (queries/ms)
+
+| Type of the element | Algorithm | Queries per ms |
+| :----- | :-------------------------- | ---------: |
+| Long   | Bloom filter (fpp = 0.389%) |  8,879.024 |
+|        | Bloom filter (fpp = 0.002%) |  6,534.761 |
+|        | Xor filter (8 bit)          | 17,458.015 |
+|        | Xor filter (16 bit)         | 16,975.909 |
+| Srring | Bloom filter (fpp = 0.389%) |  5,318.409 |
+|        | Bloom filter (fpp = 0.002%) |  4,449.762 |
+|        | Xor filter (8 bit)          |  7,121.787 |
+|        | Xor filter (16 bit)         |  7,128.727 |
+
+### Serialization size
+
+These serialization sizes of the filters approximately equal to the memory footprint of the filters.
+
+| Algorithm | Serialization size (byte) | Bit per entry |
+| --- | ---: | ---: |
+| Bloom filter (fpp = 0.389%) | 144,390 | 11.551 |
+| Bloom filter (fpp = 0.002%) | 281,510 | 22.521 |
+| Xor filter (8 bit) | 123,042 | 9.843 |
+| Xor filter (16 bit) | 246,075 | 19.686 |
